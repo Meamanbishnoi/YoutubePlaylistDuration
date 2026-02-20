@@ -3,14 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>YouTube Playlist Duration Calculator - Professional Tool</title>
+    <title>YouTube Playlist Duration Calculator - Plan Your Watch Time</title>
     <meta name="description" content="Calculate YouTube playlist duration with playback speed options. Professional tool for content creators and learners.">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>▶️</text></svg>">
+    
+    <!-- PWA Meta Tags -->
+    <meta name="theme-color" content="#ef4444">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="YT Playlist Calc">
+    <link rel="apple-touch-icon" href="{{ url_for('static', filename='icon-192.png') }}">
+    <link rel="manifest" href="{{ url_for('static', filename='manifest.json') }}">
+    
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
+    <div class="header-bg"></div>
     <div class="container">
-        <h1>YouTube Playlist Calculator</h1>
-        <p class="subtitle">Calculate total duration with playback speed options</p>
+        <div class="header-section">
+            <div class="logo">
+                <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="48" height="48" rx="12" fill="url(#gradient)"/>
+                    <path d="M19 16L32 24L19 32V16Z" fill="white"/>
+                    <defs>
+                        <linearGradient id="gradient" x1="0" y1="0" x2="48" y2="48">
+                            <stop offset="0%" stop-color="#ef4444"/>
+                            <stop offset="100%" stop-color="#dc2626"/>
+                        </linearGradient>
+                    </defs>
+                </svg>
+            </div>
+            <h1>YouTube Playlist Duration Calculator</h1>
+            <p class="subtitle">Instantly calculate total watch time with playback speed options</p>
+            <div class="features-badges">
+                <span class="badge">⚡ Fast</span>
+                <span class="badge">🎯 Accurate</span>
+                <span class="badge">🆓 Free</span>
+            </div>
+        </div>
         
         <div class="card">
             <div class="input-section">

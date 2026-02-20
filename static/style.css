@@ -12,35 +12,116 @@ body {
     min-height: 100vh;
     padding: 40px 20px;
     color: #e2e8f0;
+    position: relative;
+    overflow-x: hidden;
+}
+
+.header-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 400px;
+    background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+    z-index: -1;
+}
+
+.header-bg::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at 20% 50%, rgba(239, 68, 68, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 50%, rgba(59, 130, 246, 0.1) 0%, transparent 50%);
 }
 
 .container {
     max-width: 900px;
     margin: 0 auto;
+    position: relative;
+    z-index: 1;
+}
+
+.header-section {
+    text-align: center;
+    margin-bottom: 50px;
+    animation: fadeInDown 0.6s ease;
+}
+
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.logo {
+    display: inline-block;
+    margin-bottom: 20px;
+    animation: scaleIn 0.5s ease;
+}
+
+@keyframes scaleIn {
+    from {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.logo svg {
+    filter: drop-shadow(0 4px 12px rgba(239, 68, 68, 0.3));
+    transition: transform 0.3s ease;
+}
+
+.logo:hover svg {
+    transform: scale(1.05);
 }
 
 h1 {
     text-align: center;
     color: #f8fafc;
-    margin-bottom: 12px;
+    margin-bottom: 16px;
     font-size: 2.5em;
     font-weight: 700;
     letter-spacing: -0.02em;
-}
-
-h1::before {
-    content: '▶';
-    color: #ef4444;
-    margin-right: 12px;
-    font-size: 0.9em;
+    line-height: 1.2;
 }
 
 .subtitle {
     text-align: center;
     color: #94a3b8;
-    font-size: 1.1em;
-    margin-bottom: 50px;
+    font-size: 1.15em;
+    margin-bottom: 24px;
     font-weight: 400;
+}
+
+.features-badges {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: 20px;
+}
+
+.badge {
+    background: rgba(59, 130, 246, 0.1);
+    border: 1px solid rgba(59, 130, 246, 0.3);
+    color: #60a5fa;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 0.9em;
+    font-weight: 500;
+    backdrop-filter: blur(10px);
 }
 
 .card {
@@ -262,18 +343,86 @@ button:active {
     color: #60a5fa;
 }
 
+/* PWA Install Banner */
+.install-banner {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #1e293b;
+    border: 1px solid #334155;
+    border-radius: 12px;
+    padding: 16px 20px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+    z-index: 1000;
+    animation: slideUp 0.3s ease;
+    max-width: 90%;
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateX(-50%) translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+    }
+}
+
+.install-content {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: #e2e8f0;
+    font-size: 0.95em;
+}
+
+.install-btn {
+    background: #3b82f6;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-size: 0.9em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    width: auto;
+}
+
+.install-btn:hover {
+    background: #2563eb;
+    transform: translateY(-1px);
+}
+
+.dismiss-btn {
+    background: transparent;
+    color: #94a3b8;
+    border: none;
+    padding: 4px 8px;
+    font-size: 1.2em;
+    cursor: pointer;
+    transition: color 0.2s;
+    width: auto;
+}
+
+.dismiss-btn:hover {
+    color: #e2e8f0;
+}
+
 @media (max-width: 768px) {
     body {
         padding: 20px 16px;
     }
     
     h1 {
-        font-size: 2em;
+        font-size: 1.8em;
     }
     
     .subtitle {
         font-size: 1em;
-        margin-bottom: 30px;
+        margin-bottom: 20px;
     }
     
     .card {
@@ -283,14 +432,28 @@ button:active {
     .duration-grid {
         grid-template-columns: repeat(2, 1fr);
     }
+    
+    .features-badges {
+        gap: 8px;
+    }
+    
+    .badge {
+        font-size: 0.85em;
+        padding: 6px 12px;
+    }
 }
 
 @media (max-width: 480px) {
     h1 {
-        font-size: 1.75em;
+        font-size: 1.5em;
     }
     
     .duration-grid {
         grid-template-columns: 1fr;
+    }
+    
+    .logo svg {
+        width: 40px;
+        height: 40px;
     }
 }

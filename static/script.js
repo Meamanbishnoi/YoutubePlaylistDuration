@@ -1,3 +1,57 @@
+// Register Service Worker for PWA
+if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/static/sw.js')
+            .then(registration => {
+                console.log('Service Worker registered successfully:', registration.scope);
+            })
+            .catch(error => {
+                console.log('Service Worker registration failed:', error);
+            });
+    });
+}
+
+// PWA Install Prompt
+let deferredPrompt;
+window.addEventListener('beforeinstallprompt', (e) => {
+    e.preventDefault();
+    deferredPrompt = e;
+    showInstallPromotion();
+});
+
+function showInstallPromotion() {
+    const installBanner = document.createElement('div');
+    installBanner.className = 'install-banner';
+    installBanner.innerHTML = `
+        <div class="install-content">
+            <span>📱 Install app for quick access</span>
+            <button onclick="installApp()" class="install-btn">Install</button>
+            <button onclick="dismissInstall()" class="dismiss-btn">✕</button>
+        </div>
+    `;
+    document.body.appendChild(installBanner);
+}
+
+function installApp() {
+    const banner = document.querySelector('.install-banner');
+    if (banner) banner.remove();
+    
+    if (deferredPrompt) {
+        deferredPrompt.prompt();
+        deferredPrompt.userChoice.then((choiceResult) => {
+            if (choiceResult.outcome === 'accepted') {
+                console.log('User accepted the install prompt');
+            }
+            deferredPrompt = null;
+        });
+    }
+}
+
+function dismissInstall() {
+    const banner = document.querySelector('.install-banner');
+    if (banner) banner.remove();
+}
+
 async function calculateDuration() {
     const playlistUrl = document.getElementById('playlist-url').value.trim();
     const videoCount = document.getElementById('video-count').value;
