@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YouTube Playlist Duration Calculator - Professional Tool</title>
+    <meta name="description" content="Calculate YouTube playlist duration with playback speed options. Professional tool for content creators and learners.">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>YouTube Playlist Calculator</h1>
+        <p class="subtitle">Calculate total duration with playback speed options</p>
+        
+        <div class="card">
+            <div class="input-section">
+                <div class="input-group">
+                    <label for="playlist-url">Playlist URL</label>
+                    <input type="text" id="playlist-url" placeholder="https://www.youtube.com/playlist?list=..." />
+                </div>
+                
+                <div class="input-group">
+                    <label for="video-count">Calculate up to video # (optional)</label>
+                    <input type="number" id="video-count" placeholder="Leave empty for all videos" min="1" />
+                </div>
+                
+                <button onclick="calculateDuration()">Calculate Duration</button>
+            </div>
+            
+            <div id="loading" class="loading" style="display: none;">
+                Calculating
+            </div>
+            
+            <div id="error" class="error" style="display: none;"></div>
+        </div>
+        
+        <div id="results" class="results card" style="display: none;">
+            <h2>Duration Results</h2>
+            <p class="video-count">Total Videos:<span id="total-videos"></span></p>
+            
+            <div class="duration-grid">
+                <div class="duration-card">
+                    <h3>1x Speed</h3>
+                    <p id="duration-1x"></p>
+                </div>
+                <div class="duration-card">
+                    <h3>1.25x Speed</h3>
+                    <p id="duration-1-25x"></p>
+                </div>
+                <div class="duration-card">
+                    <h3>1.5x Speed</h3>
+                    <p id="duration-1-5x"></p>
+                </div>
+                <div class="duration-card">
+                    <h3>1.75x Speed</h3>
+                    <p id="duration-1-75x"></p>
+                </div>
+                <div class="duration-card">
+                    <h3>2x Speed</h3>
+                    <p id="duration-2x"></p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>Built with YouTube Data API v3</p>
+        </div>
+    </div>
+    
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
